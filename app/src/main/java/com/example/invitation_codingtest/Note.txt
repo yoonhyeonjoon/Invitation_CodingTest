@@ -1,0 +1,67 @@
+
+//1>>>> Array 배열 생성법
+//1. val array : Array<Int> = arrayOf(1,2,3)
+//2. val array2 = arrayOfNulls<Int>(3) // null,null,null 생성
+//3. val array3 = / 람다식을 사용하여 생성방법
+//4. val array : IntArray = intArrayOf(1,2,3) : 이것의 타입은 inArray이다. arrayOf(1,2,3)로 생성하는 Array<Int>와는 다른 속성이므로 유의할 것
+//5. val arr = IntArray(5)
+//6. val nulls = arrayOfNulls<String>(size) //equivalent in Java: new String[size]
+//7. val strings = Array(size) { "n = $it" }
+//8. val myStrings = arrayOf("foo", "bar", "baz")
+//9. val boxedInts = arrayOfNulls<Int>(size) //equivalent in Java: new Integer[size]
+//10. val boxedZeros = Array(size) { 0 }  <= 모두 0으로 초기화
+//  private val days = arrayOf("Mo", "Tu", "Wed", "Th", "Fr", "Sa", "Su")
+//  for (i in 0..position - 1)
+
+//2>>>>withIndex 예제 => for문에 인덱싱을 동시에 하도록하는 withIndex 예제
+//    val iterator = ('a'..'c').iterator()
+//    for ((index, value) in iterator.withIndex()) {
+//        println("The element at $index is $value")
+//    }
+
+//3>>> Map/Set 예제
+
+Set :
+리스트와 달리 중복을 허용하지 않는다. 순차적이지 않은 집합. setOf() 함수에 의해 생성가능
+MutableSet, HashSet, LinkedHashSet, TreeSet 이 있음
+
+Map :
+mapOf() 함수로 생성 가능,
+ex : val map1 : Map<String, Int> = mapOf("one" to 1, "two" to 2)
+val map2 : Map<String, Int> = mapOf(Pair("one",1), Pair("two", 2))
+put/set/remove로 조정
+
+HashMap
+내부적으로 Entry<K,V>[] Entry 의 array 로 되어 있다. 해당 array 에 index 는 내부 해쉬 함수를 통해 계산된다.
+
+TreeMap
+내부적으로 RedBlack Tree로 저장됨, 키값에 대한 Compartor 구현으로 정렬 순서를 바꿀수 있다.
+LinkedHashMap
+
+링크드 리스트로 저장됨
+키값은 입력 순서대로 출력되어서 나온다.
+
+특별한 이유가 없다면 검색 성능이 좋은(O(1)) HashMap 을 사용하자
+키값이 일정한 수준대로 iterate 하려고 한다면 TreeMap 을 사용하자. 하지만 랜덤 접근에 대해서는 O(logn) 성능을 지니므로 많은 데이터를 넣을경우 좋지 않은 성능이 나올수 있다.
+입력 순서가 의미있다면 LinkedHashMap 을 사용하자. 랜덤 접근에 대해 O(n) 성능을 지니므로 많은 데이터를 입력할 경우 사용하지 않는것이 좋겠다.
+
+
+
+    val array_for_return_selected = Array<Int>(queries.size) { 0 }
+    for(string in strings)
+    {
+        for ((index, query) in queries.withIndex())
+        {
+            if(string == query)
+            {
+                array_for_return_selected[index]++
+            }
+        }
+    }
+
+
+//val array_for_return2 = intArrayOf(0,0,0,...)
+
+//    val arr = IntArray(5)
+//    var array_for_return = arrayOf<Int>()
+//    val array_for_return1 = Array(15) { 0 }
