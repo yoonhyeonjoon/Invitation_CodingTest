@@ -1,3 +1,6 @@
+코드 예제
+https://www.geeksforgeeks.org/write-a-c-program-to-print-all-permutations-of-a-given-string/
+
 
 //1>>>> Array 배열 생성법
 //1. val array : Array<Int> = arrayOf(1,2,3)
@@ -10,6 +13,7 @@
 //8. val myStrings = arrayOf("foo", "bar", "baz")
 //9. val boxedInts = arrayOfNulls<Int>(size) //equivalent in Java: new Integer[size]
 //10. val boxedZeros = Array(size) { 0 }  <= 모두 0으로 초기화
+//11.  var matchingA = mutableListOf<Int>() <=  뮤타블은 add를 사용할수 있음
 //  private val days = arrayOf("Mo", "Tu", "Wed", "Th", "Fr", "Sa", "Su")
 //  for (i in 0..position - 1)
 
@@ -18,6 +22,9 @@
 //    for ((index, value) in iterator.withIndex()) {
 //        println("The element at $index is $value")
 //    }
+
+val types = Array<Long>(size, {0L})
+val containers = Array<Long>(size, {0L})
 
 //3>>> Map/Set 예제
 
@@ -29,6 +36,8 @@ Map :
 mapOf() 함수로 생성 가능,
 ex : val map1 : Map<String, Int> = mapOf("one" to 1, "two" to 2)
 val map2 : Map<String, Int> = mapOf(Pair("one",1), Pair("two", 2))
+map2.put/set("two", 20)
+map2.remove("two")
 put/set/remove로 조정
 
 HashMap
@@ -65,3 +74,78 @@ LinkedHashMap
 //    val arr = IntArray(5)
 //    var array_for_return = arrayOf<Int>()
 //    val array_for_return1 = Array(15) { 0 }
+
+for문 예시
+for(index in 0..matchingB.size)
+{
+
+}
+
+for(index in 0..matchingB.size)
+{
+matchingB.set(matchingB[index].first, false)
+}
+
+
+----------------------------------subList----------------------------------------------------
+List 끊거나 취하는 예제
+List<E> subList(int fromIndex, int toIndex)
+List<String> list = new ArrayList<String>();
+  list.add("한진"); 1
+  list.add("두진"); 2
+  list.add("세진"); 3
+  list.add("네진"); 4
+  list.add("다섯진"); 5
+  list.add("여섯진"); 6
+  list.add("일곱진"); 7
+  System.out.println(list.subList(3, list.size()));
+[네진, 다섯진, 여섯진, 일곱진]
+ System.out.print(list.subList(1, 5));
+[두진, 세진, 네진, 다섯진]
+----------------------------------Slice----------------------------------------------------
+val nums = arrayOf(1,2,3,4,5)
+println(nums.get(0))
+nums.set(0,0)
+println(Arrays.toString(nums))
+
+val nums2 = nums.plus(1)
+println(Arrays.toString(nums2))
+
+val slice = nums.sliceArray(1..3)
+println(Arrays.toString(slice))
+
+println(nums.first())
+println(nums.last())
+println(nums.indexOf(5))
+
+------------------------------------------------String 처리 관련-----------------------------------------------
+------------------------------------------------String builder-----------------------------------------------
+1. String은 immutable하다. 따라서 이를 배열과 같이 사용하여 바꿀수는 없다. 이를 해결하기위해서는 https://www.baeldung.com/java-replace-character-at-index 참고
+val StringX = "abcde"가 있으면 Stringy = String.toCharArray() 바꾸어 주어서 staringy[5] ='3' 이런식으로 사용하면된다.
+  var stringgrid = calculatedGrid[yindex].toCharArray()
+2. 이를 다시 String으로 합치려면   calculatedGrid[yindex] = stringgrid.joinToString("") 와 같이 ""를 기점으로 char를 string으로 add하는 명령어로 string을 만들어줄수 있다.
+
+
+public String replaceCharUsingCharArray(String str, char ch, int index) {
+    char[] chars = str.toCharArray();
+    chars[index] = ch;
+    return String.valueOf(chars);
+}
+
+public String replaceChar(String str, char ch, int index) {
+    return str.substring(0, index) + ch + str.substring(index+1);
+}
+
+public String replaceChar(String str, char ch, int index) {
+    StringBuilder myString = new StringBuilder(str);
+    myString.setCharAt(index, ch);
+    return myString.toString();
+}
+
+val a = "Hello"
+val b = "World"
+val sb = StringBuilder()
+sb.append(a).append(b)
+val c = sb.toString()
+
+print(c)
