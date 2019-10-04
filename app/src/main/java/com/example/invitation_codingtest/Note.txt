@@ -46,7 +46,6 @@ LinkedHashMap
 입력 순서가 의미있다면 LinkedHashMap 을 사용하자. 랜덤 접근에 대해 O(n) 성능을 지니므로 많은 데이터를 입력할 경우 사용하지 않는것이 좋겠다.
 
 
-
     val array_for_return_selected = Array<Int>(queries.size) { 0 }
     for(string in strings)
     {
