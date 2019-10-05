@@ -19,42 +19,18 @@ import kotlin.text.*
 /*
  * Complete the simpleArraySum function below.
  */
-fun timeConversion(s: String): String {
-
-    var a= s.split(":")
-
-    var b = a[2].substring(2)
-    var c = a[2].substring(0,2)
-
-    val wj_formatter = DecimalFormat("00")
-
-    var hour = a[0].toInt()
-    var hour2 = wj_formatter.format(hour)
-    if (b.equals("PM") ) {
-        if(hour.equals(12)){
-            hour=12
-        }
-        else hour += 12
-        return "${hour}:${a[1]}:${c}"
-    }
-
-
-    else
-        when(hour) {
-            12 -> hour2 = "00"
-            else -> hour2 = hour2
-        }
-    return  "${hour2}:${a[1]}:${c}"
-
-}
-
 fun main(args: Array<String>) {
-    val scan = Scanner(System.`in`)
-
-    val s = scan.nextLine()
-
-    val result = timeConversion(s)
-
-    println(result)
+    fun formatMilitary(parts: List<Int>) = parts.joinToString(":") { "%02d".format(it) }
+    val time = readLine()!!
+    val values = time.removeSuffix("PM").removeSuffix("AM").split(":").map { it.toInt() }
+    val military = if (time.endsWith("PM"))
+        formatMilitary(listOf(
+            if (values[0] < 12) values[0] + 12 else 12,
+            values[1],
+            values[2])
+        )
+    else
+        formatMilitary(listOf(if (values[0] < 12) values[0] else 0, values[1], values[2]))
+    println(military)
 }
 

@@ -1,0 +1,17 @@
+
+                invoke : https://wooooooak.github.io/kotlin/2019/03/21/kotlin_invoke/
+ 연산자 처럼 함수를 불러오지 않고 사용할 수 있게 해주는 거같음!
+
+
+
+                inline fuc : http://blog.naver.com/PostView.nhn?blogId=yuyyulee&logNo=221389623237&categoryNo=22&parentCategoryNo=0&viewDate=&currentPage=1&postListTopCurrentPage=1&from=search
+ 인라인을 사용 안하면 람다식을 사용할 경우 객체를 생성하고 그 객체에대한 메모리 할당을 하게 되어 그객체를 실행후 본래의 fuc을 실행하므로
+ 더 많은 메모리 할당이 되어 느려질? 수도 있다.
+ 인라인을 사용할 경우 새로운 가상 객체를 만들지 않고 그 인라인 fuc의 함수를 그대로 본래의 fuc에 붙여서 사용하므로 가상 객체를 만들지 않아
+ 메모리 할당이 안된다. 하지만 실제 바이트 코드에서는 코드의 길이가 길어지므로 단점이 될 수도 있다.
+
+
+
+
+            arrayListof 배열을 만들어 그 리스트를 return함
+            arrayOf  배열을 만들어 주므로 배열 자체 return함 그래서 배열의 index를 이용하여 불러오는 과정이 필요
