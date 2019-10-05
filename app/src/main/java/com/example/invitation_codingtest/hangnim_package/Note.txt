@@ -126,7 +126,7 @@ val StringX = "abcde"가 있으면 Stringy = String.toCharArray() 바꾸어 주�
 2. 이를 다시 String으로 합치려면   calculatedGrid[yindex] = stringgrid.joinToString("") 와 같이 ""를 기점으로 char를 string으로 add하는 명령어로 string을 만들어줄수 있다.
 
 
-public String replaceCharUsingCharArray(String str, char ch, int index) {
+public String com.example.invitation_codingtest.hangnim_package.replaceCharUsingCharArray(String str, char ch, int index) {
     char[] chars = str.toCharArray();
     chars[index] = ch;
     return String.valueOf(chars);
@@ -142,10 +142,12 @@ public String replaceChar(String str, char ch, int index) {
     return myString.toString();
 }
 
+
 val a = "Hello"
 val b = "World"
 val sb = StringBuilder()
 sb.append(a).append(b)
 val c = sb.toString()
-
 print(c)
+
+

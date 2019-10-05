@@ -1,3 +1,5 @@
+package com.example.invitation_codingtest.hangnim_package
+
 import java.lang.Math.abs
 import java.util.*
 import kotlin.collections.*
@@ -37,7 +39,7 @@ fun swapping(s: List<Int>, a : Pair<Int, Int>) : List<Int>
     return list_container.toList()
 }
 
-// Complete the formingMagicSquare function below.
+// Complete the com.example.invitation_codingtest.hangnim_package.formingMagicSquare function below.
 fun formingMagicSquare(s: Array<Array<Int>>): Int {
 
     val stacknumber = mutableMapOf(Pair(1, 0),Pair(2, 0),Pair(3, 0),Pair(4, 0),Pair(5, 0),Pair(6, 0),Pair(7, 0),Pair(8, 0),Pair(9, 0))
@@ -77,7 +79,11 @@ fun formingMagicSquare(s: Array<Array<Int>>): Int {
         }
     }
 
-    permuationing(matchingA_valueonly, matchingB_valueonly, 0)
+    permuationing(
+        matchingA_valueonly,
+        matchingB_valueonly,
+        0
+    )
 
 
     return intglobal

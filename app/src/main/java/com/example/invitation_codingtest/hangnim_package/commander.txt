@@ -1,0 +1,32 @@
+1. 문자열 처리시 명령어 모음
+joinToString(":")  : ":"를 넣어서 문자열을 합침
+removeSuffix("PM") : 접미사 PM을 제거
+removePrefix("AM") : 접두사 "AM"을 제거
+split(":") : ":" 를 기준으로 문자열을 쪼개서 배열을 만듬( List<String> 타입으로 만듬)
+map{ } : 배열 전체에 영향을 미치는 방법
+values.joinToString(":") { "%05d".format(it) } : 5칸을 확보하고 값이 있으면 값을채우고 해당 자리수에 수가 없으면 0을 채움
+String은 immutable이다. 각각을 배열처럼 인식하려면 String을 toCharArray로 바꾸어주어 처리한뒤 Stringbuilder로 다시 String으로 만들어주어야한다
+trim 공백을 제거하는 함수
+replaceRange : new_time = new_time.replaceRange(0, 2, (hour + 12).toString())
+take(8) : 문자열에서 8개를 취한다
+startwith() / endtwith() : 문자열의 존재를 찾는다. 처음에 찾을 것인지 뒤에 찾을 것인지
+
+----------------------------------
+스캐너로 읽은 라인은 String이 된다.
+val scanner = Scanner(System.`in`)
+val time = scanner.nextLine()
+-----------------------------------
+//String의 일부분을 "배열접근"으로 바꾸는 스탭은 아래와 같다
+만약 배열접근이 아니라 메소드 접근을 할려면 String에서 Substring이나 trim, removeprefix 등등을 써서 할수 있다.
+-------------------------------------------
+val time = "AM07:05:45PM"
+val time2 = time.toCharArray()
+val dok = time[2]
+//time[2] = 5 => 사용불가. 왜냐하면 String은 immutable이기 때문이다.
+time2[2] =  '5' // 5.toChar()
+val time3 =  time2.joinToString("")
+-----------------------------------------------------
+
+
+
+

@@ -1,23 +1,11 @@
-import java.io.*
+package com.example.invitation_codingtest.hangnim_package
+
 import java.lang.Integer.min
-import java.math.*
-import java.security.*
-import java.text.*
 import java.util.*
-import java.util.Collections.max
-import java.util.concurrent.*
-import java.util.function.*
-import java.util.regex.*
-import java.util.stream.*
 import kotlin.collections.*
-import kotlin.comparisons.*
 import kotlin.io.*
-import kotlin.jvm.*
-import kotlin.jvm.functions.*
-import kotlin.jvm.internal.*
 import kotlin.math.max
 import kotlin.ranges.*
-import kotlin.sequences.*
 import kotlin.text.*
 
 //6 7 5
@@ -41,7 +29,7 @@ fun replaceCharUsingCharArray(str: String, ch: Char, index: Int): String {
     return String(chars)
 }
 
-// Complete the bomberMan function below.
+// Complete the com.example.invitation_codingtest.hangnim_package.bomberMan function below.
 fun bomberMan(n: Int, grid: Array<String>): Array<String> {
     var nn = n
     var transedGrid = grid.clone()
