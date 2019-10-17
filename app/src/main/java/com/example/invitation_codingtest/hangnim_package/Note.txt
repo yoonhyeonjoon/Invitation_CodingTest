@@ -1,6 +1,22 @@
 코드 예제
 https://www.geeksforgeeks.org/write-a-c-program-to-print-all-permutations-of-a-given-string/
 
+//listOf 예제, group by
+    val evenList   = listOf(0,"a",1,"b",2,"c")
+    val unevenList = listOf(0,"a",1,"b",2,"c",3)
+    val numberList   = listOf(1,2,3,4,5,6)
+    val result1 = numberList.groupBy { (it + 1) / 2 }
+    val result2 = numberList.groupBy { (it + 1) / 2 }.values //key value에서 value값만 추출
+    val numberList2   = listOf(1,2,3,4,5,6,7)
+    val result3 = numberList2.groupBy { (it + 1) / 2 }
+    val result4 = numberList2.groupBy { (it + 1) / 2 }.values
+    val result5 = unevenList.windowed(2,2,true) //사이즈 2로 2칸씩 띄어서 윈도우 씌워서 값들을 뽑아냄, 파셜 윈도우 옵션이 커져있으면 윈도우 크기가 안맞는 끄트머리도 포함
+    val result6 = unevenList.windowed(2,2,false) //partialWindows를 꺼놨으므로 uneven의 끄트머리를 버린다.
+    val result7 = unevenList.windowed(3,2,true)
+    val result8 = unevenList.windowed(3,2,false)
+    val result9  = evenList.chunked(3)
+    val result10 = evenList.chunked(4)
+
 
 //1>>>> Array 배열 생성법
 //1. val array : Array<Int> = arrayOf(1,2,3)
