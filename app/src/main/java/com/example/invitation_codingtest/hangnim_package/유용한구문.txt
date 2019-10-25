@@ -1,3 +1,9 @@
+
+필터를 써서 분류 가능
+  val totalStudentsArrived = studentComeTime.filter { it <= 0 }.count()
+맵을 아래처럼 써서 모든 인자를 바로 인트로 바꿀수있다.
+  val studentComeTime = scanner.nextLine().split(" ").map(String::toInt).toTypedArray()
+
 코드 예제
 https://www.geeksforgeeks.org/write-a-c-program-to-print-all-permutations-of-a-given-string/
 
