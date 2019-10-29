@@ -146,7 +146,7 @@ println(nums.indexOf(5))
 val StringX = "abcde"가 있으면 Stringy = String.toCharArray() 바꾸어 주어서 staringy[5] ='3' 이런식으로 사용하면된다.
   var stringgrid = calculatedGrid[yindex].toCharArray()
 2. 이를 다시 String으로 합치려면   calculatedGrid[yindex] = stringgrid.joinToString("") 와 같이 ""를 기점으로 char를 string으로 add하는 명령어로 string을 만들어줄수 있다.
-
+gt
 
 public String com.example.invitation_codingtest.hangnim_package.replaceCharUsingCharArray(String str, char ch, int index) {
     char[] chars = str.toCharArray();

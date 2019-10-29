@@ -29,6 +29,7 @@ fun main(args: Array<String>) {
             values[1],
             values[2])
         )
+
     else
         formatMilitary(listOf(if (values[0] < 12) values[0] else 0, values[1], values[2]))
     println(military)

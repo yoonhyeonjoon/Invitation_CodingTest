@@ -24,10 +24,10 @@ fun main(args: Array<String>) {
 
         var date = arrayListOf<String>("00","00","${year}")
         if(year < 1918){
-            if (year.rem(4) == 0)
-                date = arrayListOf<String>("12","09","${year}")
+            date = if (year.rem(4) == 0)
+                arrayListOf<String>("12","09","${year}")
             else
-                date = arrayListOf<String>("13","09","${year}")
+                arrayListOf<String>("13","09","${year}")
         }
         else if (year == 1918) {
             date = arrayListOf<String>("26","09","${year}")
