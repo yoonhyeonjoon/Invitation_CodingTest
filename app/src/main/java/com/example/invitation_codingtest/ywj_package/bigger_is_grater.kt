@@ -24,8 +24,7 @@ fun main(args: Array<String>) {
 
     repeat(firstinput) {
         val exchange = scan.nextLine().trim().map {
-            it.toInt()
-        }.toMutableList()
+            it.toInt()}.toMutableList()
 
         for (n in exchange.size - 1 downTo 0) {
             if (n == 0) {

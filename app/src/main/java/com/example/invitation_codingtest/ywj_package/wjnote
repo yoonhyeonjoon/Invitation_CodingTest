@@ -17,4 +17,26 @@
             arrayOf  배열을 만들어 주므로 배열 자체 return함 그래서 배열의 index를 이용하여 불러오는 과정이 필요
 
 
+배열 팁!
+filternotenull : 널이 아닌 값만 추리는 경우
+                               filterisinstance 특정타입만 추려짐
+                               totypedarray 배열 넘길때  배열로 변환시키는거
+                               tointarray 박싱하지 않은 원시 타입 배열로 변환
+등등 https://umbum.tistory.com/609
 
+.distinct() // 같은 값을 가진 거 제거하는 함수임!
+
+array를 사용 해서 저장하고 println으로 표현하게 되면 주소의 형태로 값이 표현되어 정상적인 내용물을 볼 수 없음
+그러므로
+array.tolist로 표현하면 일반적인 형태의 배열로 볼 수 있음!
+
+
+https://m.blog.naver.com/PostView.nhn?blogId=yuyyulee&logNo=221237499417&proxyReferer=https%3A%2F%2Fwww.google.com%2F
+배열의 immutable 과 mutable 에대한 얘기
+
+
+https://beomseok95.tistory.com/157
+자료상속 구현도
+
+https://beomseok95.tistory.com/157
+collection에대해! 자세함
