@@ -184,14 +184,15 @@ fun main(args: Array<String>) {
      r = rcn[0].trim().toInt()
      c = rcn[1].trim().toInt()
      n = rcn[2].trim().toInt()
-
-    val grid = Array<String>(r, { "" })
-    for (i in 0 until r) {
-        val gridItem = scan.nextLine()
-        grid[i] = gridItem
-    }
-
-    val result = bomberMan(n, grid)
-
-    println(result.joinToString("\n"))
+//
+//    val grid = Array<String>(r, { "" }
+//
+//    for (i in 0 until r) {
+//        val gridItem = scan.nextLine()
+//        grid[i] = gridItem
+//    }
+//
+//    val result = bomberMan(n, grid)
+//
+//    println(result.joinToString("\n"))
 }

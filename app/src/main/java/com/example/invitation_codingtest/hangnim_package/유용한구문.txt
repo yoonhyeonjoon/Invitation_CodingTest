@@ -1,3 +1,33 @@
+맵 사용법 및 접근
+
+맵을 수정가능한 맵으로 만들려면 뮤타블을 써야한다.
+ var checkmap = mutableMapOf<Int,Boolean>()
+        for(i in A)
+        {
+            널이 아님을 찾을때의 접근
+            if(checkmap[i] == null)
+
+            값 넣기
+                checkmap.put(i, false)
+            else if(checkmap[i] == true)
+                checkmap.put(i, false)
+            else if(checkmap[i] == false)
+                checkmap.put(i, true)
+        }
+            키와 벨류로 접근
+        for((key,value) in checkmap) {
+            if (value == false) {
+                return key
+                break
+            }
+        }
+        return 0
+    }
+
+문자열 반복
+
+println("Word".repeat(4)) // WordWordWordWord
+println("Word".repeat(0)) //
 
 필터를 써서 분류 가능
   val totalStudentsArrived = studentComeTime.filter { it <= 0 }.count()
@@ -25,6 +55,7 @@ https://www.geeksforgeeks.org/write-a-c-program-to-print-all-permutations-of-a-g
 
 
 //1>>>> Array 배열 생성법
+
 //1. val array : Array<Int> = arrayOf(1,2,3)
 //2. val array2 = arrayOfNulls<Int>(3) // null,null,null 생성
 //3. val array3 = / 람다식을 사용하여 생성방법
@@ -38,6 +69,7 @@ https://www.geeksforgeeks.org/write-a-c-program-to-print-all-permutations-of-a-g
 //11.  var matchingA = mutableListOf<Int>() <=  뮤타블은 add를 사용할수 있음
 //  private val days = arrayOf("Mo", "Tu", "Wed", "Th", "Fr", "Sa", "Su")
 //  for (i in 0..position - 1)
+// 12 val arr1 = Array<Int>(5,{0}) //크기가 5이고 값이 0으로 채워짐, 크기 고정
 
 //2>>>>withIndex 예제 => for문에 인덱싱을 동시에 하도록하는 withIndex 예제
 //    val iterator = ('a'..'c').iterator()
