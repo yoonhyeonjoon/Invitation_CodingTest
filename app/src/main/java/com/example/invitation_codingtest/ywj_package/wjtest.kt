@@ -19,29 +19,19 @@ import kotlin.sequences.*
 import kotlin.text.*
 
 
-fun main(args: Array<String>) {
-    var makearray = mutableListOf<Int>()
-    val scan =Scanner(System.`in`)
-    val n = scan.nextInt()
-
-    for (i in 0 until n){
-        val element = scan.nextInt()
-        makearray.add(element)
-    }
-
-    fun solution (array : IntArray ):Int {
-        var file = array.sorted()
-        var result = 0
-        for (i in 0 until file.size-2 step 2)
+fun main(args : Array<String>){
+    fun solution(A: IntArray): Int {
+        var resultof = 0
+        for(a in A)
         {
-            if(file[i]!=file[i+1]) {
-                result = file[i]
-                break
-            }
-            else result = file[i+2]
+            resultof = resultof xor a
         }
-        return result
+        return  resultof
     }
-    println(solution(makearray.toIntArray()))
-}
 
+
+    var A = intArrayOf(9,3,9,3,9,7,9)
+    val B = solution(A)
+    println(B)
+
+}
