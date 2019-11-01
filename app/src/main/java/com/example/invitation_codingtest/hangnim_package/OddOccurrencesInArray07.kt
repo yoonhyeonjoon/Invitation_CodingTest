@@ -7,6 +7,7 @@ import kotlin.collections.HashMap
 
 //xor으로 구현, 스코어 88%, 올바름 100%, 퍼포먼스 75%
 fun main(args : Array<String>){
+
     fun solution(A: IntArray): Int {
         val checkfor = A.max()
         val container = Array(checkfor!!+1) { 0 }

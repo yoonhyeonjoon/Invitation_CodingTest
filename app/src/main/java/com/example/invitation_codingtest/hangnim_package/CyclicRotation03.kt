@@ -4,7 +4,7 @@ import java.lang.StringBuilder
 import java.util.*
 import kotlin.collections.HashMap
 
-// 태스크 스코어 50% 올바름 50% 성능 : 평가안됨
+// 태스크 스코어 100% 올바름 100% 성능
 fun main(args : Array<String>){
 
     fun solution(A: IntArray, K: Int): IntArray {
