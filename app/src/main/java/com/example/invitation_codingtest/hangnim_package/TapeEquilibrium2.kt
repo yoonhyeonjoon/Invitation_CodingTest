@@ -1,6 +1,6 @@
 import java.lang.Math.abs
 
-//38% 스코어
+//100% 스코어
 fun main(args : Array<String>){
     fun solution(A: IntArray): Int {
 
