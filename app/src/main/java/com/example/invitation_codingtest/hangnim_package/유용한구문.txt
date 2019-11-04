@@ -1,3 +1,8 @@
+//http://abh0518.net/tok/?p=556
+
+
+인테져 최소 값 : Integer.MIN_VALUE
+
 맵 사용법 및 접근
 
 맵을 수정가능한 맵으로 만들려면 뮤타블을 써야한다.
@@ -55,6 +60,7 @@ https://www.geeksforgeeks.org/write-a-c-program-to-print-all-permutations-of-a-g
 
 
 //1>>>> Array 배열 생성법
+  val store = IntArray(A.size) => 0으로 초기화된 애들이 생성된다.
 
 //1. val array : Array<Int> = arrayOf(1,2,3)
 //2. val array2 = arrayOfNulls<Int>(3) // null,null,null 생성
