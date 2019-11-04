@@ -27,7 +27,7 @@ fun main(args : Array<String>){
     }
 
     var A = intArrayOf(1,3,1,4,2,3,5,4)
-    var X = 5
+    var X = 3
 
     val B = solution(X,A)
     println(B)

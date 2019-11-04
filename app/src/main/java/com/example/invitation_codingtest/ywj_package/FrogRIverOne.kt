@@ -3,6 +3,8 @@ import kotlin.math.absoluteValue
 
 fun main(args: Array<String>) {
 
+    //81점
+
     fun solution(X: Int, A: IntArray): Int {
         var time=0
         var count =1
@@ -14,7 +16,6 @@ fun main(args: Array<String>) {
                 if (A[i] == count) {
                     if (time < i) {
                         time = i
-
                     }
                     count += 1
                     break
