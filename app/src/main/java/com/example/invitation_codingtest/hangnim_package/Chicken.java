@@ -21,7 +21,7 @@
 //
 //    }
 //
-//    public static void main(String[] args) throws Exception {
+//    public static void tette.tette.tette.tette.main(String[] args) throws Exception {
 //        Chicken chicken = new Chicken();
 //        System.out.println(chicken instanceof Bird);
 //    }

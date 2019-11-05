@@ -1,4 +1,4 @@
-package tette
+package com.example.invitation_codingtest.ywj_package
 
 import java.util.*
 
