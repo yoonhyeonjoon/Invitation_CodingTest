@@ -30,6 +30,7 @@ fun nonDivisibleSubset(k: Int, S: Array<Int>): Int {
 
     val remcontainer = Array<Int>(k){0}
     var resultcontainer = 0
+
     for(idx in S.indices)
     {
         val arem = S[idx].rem(k)

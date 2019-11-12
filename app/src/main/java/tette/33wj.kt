@@ -185,25 +185,22 @@ fun main(args : Array<String>){
             }
         }
 
-        val sbcheck = sb.toString()
+        val sbcheck = sb.toString()+sb.length
         return sbcheck
 
     }
 
-    println("1 : "+solution(3,1,3))
+    println("1 : "+solution(3,1,0))
     println("2 : "+solution(30,1,20))
 
 
 
 
 
-    println("1"+solution(6,1,1))
-    println("2"+solution(1,3,1))
-    println("3"+solution(0,1,8))
-    println("4"+solution(0,1,8))
-    println("5"+solution(50,0,0))
-    println("6"+solution(100,1,8))
-    println("7"+solution(30,1,20))
+    println("1 : "+solution(15,1,15) )
+    println("2 : "+solution(30,1,15))
+    println("7"+solution(30,0,20))
+
     println("8"+solution(0,0,0))
     println("9"+solution(1,1,0))
     println("10"+solution(3,1,8))
@@ -211,5 +208,5 @@ fun main(args : Array<String>){
     println("12"+solution(0,1,100))
     println("13"+solution(0,0,30))
     println("14"+solution(1,0,0))
-    println("1 : "+solution(15,1,15))
+
 }

@@ -13,7 +13,6 @@ fun main(args: Array<String>) {
 
 
     fun count (A : Array<Int> , B:Int) : Int {
-
         var countednumber =0
         for (i in 0 until A.size){
             if(A[i]==B)
@@ -21,6 +20,8 @@ fun main(args: Array<String>) {
         }
         return  countednumber
     }
+
+
 
     fun nonDivisibleSubset(n :Int , K:Int, s:Array<Int>) : Int {
 
