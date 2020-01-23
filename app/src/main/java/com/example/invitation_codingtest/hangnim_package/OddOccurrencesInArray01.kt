@@ -15,7 +15,7 @@ fun main(args : Array<String>){
             if(checkmap[i] == null)
                 checkmap.put(i, false)
             else if(checkmap[i] == true)
-                checkmap.put(i, false)
+                checkmap[i] = false
             else if(checkmap[i] == false)
                 checkmap.put(i, true)
         }
