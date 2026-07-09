@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Performance Flow Report</title>
+  <style>
+    :root {
+      --bg: #f6f7f9;
+      --card: #ffffff;
+      --line: #e5e7eb;
+      --text: #111827;
+      --muted: #6b7280;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    }
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 18px;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: flex-end;
+      margin-bottom: 12px;
+    }
+    h1 {
+      margin: 0;
+      font-size: 22px;
+    }
+    .meta {
+      color: var(--muted);
+      font-size: 13px;
+      text-align: right;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 14px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    }
+    .card-title {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+    .subtle {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .legend {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+    .legend button {
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 999px;
+      padding: 5px 9px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .legend button.hidden {
+      color: var(--muted);
+      text-decoration: line-through;
+      opacity: 0.62;
+    }
+    .legend .swatch {
+      display: inline-block;
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      margin-right: 5px;
+      vertical-align: middle;
+    }
+    .flow {
+      display: flex;
+      min-height: 180px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      overflow-x: auto;
+      background: #fafafa;
+      padding: 12px;
+      gap: 0;
+    }
+    .stage {
+      min-width: 90px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 8px;
+      padding: 4px 0;
+      border-right: 1px dashed #d1d5db;
+    }
+    .lane {
+      display: flex;
+      align-items: stretch;
+      min-height: 52px;
+      padding-right: 6px;
+    }
+    .bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-width: 42px;
+      padding: 5px;
+      color: #111827;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1.25;
+      border: 1px solid rgba(0,0,0,0.45);
+      overflow: hidden;
+      word-break: break-word;
+    }
+    .empty {
+      color: var(--muted);
+      padding: 20px;
+      font-weight: 700;
+    }
+    .table-wrap {
+      overflow: auto;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      max-height: 560px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+    th, td {
+      padding: 7px 8px;
+      border-bottom: 1px solid #f1f5f9;
+      white-space: nowrap;
+      text-align: center;
+    }
+    th {
+      position: sticky;
+      top: 0;
+      background: #f3f4f6;
+      font-weight: 800;
+    }
+    tr:nth-child(odd) td {
+      background: #fafafa;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Performance Flow Report</h1>
+      <div class="meta" id="metaText"></div>
+    </div>
+
+    <section class="card">
+      <div class="card-title">
+        <span id="flowTitle">Average Flow Sequence</span>
+        <span class="subtle">Click legend items to hide/show</span>
+      </div>
+      <div class="legend" id="legend"></div>
+      <div class="flow" id="flow"></div>
+    </section>
+
+    <section class="card">
+      <div class="card-title">
+        <span>CMD Step Details</span>
+        <span class="subtle" id="detailMeta"></span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr id="detailHead"></tr></thead>
+          <tbody id="detailBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const REPORT = {"meta": {"type": "meta", "format": "nvme_perf_minimal_report", "version": 1, "unit_label": "µs", "data_mode": "time", "start_cmd": 1, "end_cmd": 100, "detail_cmd_id": "2", "detail_freq_mhz": 525.0, "detail_columns": ["Step Name", "Time Duration", "Cycles"]}, "flow": [{"type": "flow", "name": "1_NCR", "duration_scaled": 0.0506}, {"type": "flow", "name": "2_SQ_UPDATE", "duration_scaled": 0.01}, {"type": "flow", "name": "3_ARBITER", "duration_scaled": 0.01}, {"type": "flow", "name": "4_CMD_FETCH", "duration_scaled": 0.01}, {"type": "flow", "name": "5_CMD_PARSER", "duration_scaled": 0.01}, {"type": "flow", "name": "6_LOC", "duration_scaled": 0.02}, {"type": "flow", "name": "7_CMD_DISPATCHER", "duration_scaled": 0.01}, {"type": "flow", "name": "8_TR_PROCESSOR", "duration_scaled": 0.01}, {"type": "flow", "name": "9_SGL_PRP_D2H", "duration_scaled": 0.01}, {"type": "flow", "name": "10_TQ_PREP", "duration_scaled": 0.01}, {"type": "flow", "name": "11_HDMA", "duration_scaled": 0.03}, {"type": "flow", "name": "12_CCT", "duration_scaled": 0.01}, {"type": "flow", "name": "13_CPL_POSTER", "duration_scaled": 0.01}, {"type": "flow", "name": "14_INT_GEN", "duration_scaled": 0.01}], "detail": [{"type": "detail", "Step Name": "1_NCR", "Time Duration": "0.06 µs", "Cycles": "31.5 cy"}, {"type": "detail", "Step Name": "2_SQ_UPDATE", "Time Duration": "0.01 µs", "Cycles": "5.25 cy"}, {"type": "detail", "Step Name": "3_ARBITER", "Time Duration": "0.01 µs", "Cycles": "5.25 cy"}, {"type": "detail", "Step Name": "4_CMD_FETCH", "Time Duration": "0.01 µs", "Cycles": "5.25 cy"}, {"type": "detail", "Step Name": "5_CMD_PARSER", "Time Duration": "0.01 µs", "Cycles": "5.25 cy"}, {"type": "detail", "Step Name": "6_LOC", "Time Duration": "0.02 µs", "Cycles": "10.5 cy"}, {"type": "detail", "Step Name": "7_CMD_DISPATCHER", "Time Duration": "0.01 µs", "Cycles": "5.25 cy"}, {"type": "detail", "Step Name": "8_TR_PROCESSOR", "Time Duration": "0.01 µs", "Cycles": "5.25 cy"}, {"type": "detail", "Step Name": "9_SGL_PRP_D2H", "Time Duration": "0.01 µs", "Cycles": "5.25 cy"}, {"type": "detail", "Step Name": "11_HDMA", "Time Duration": "0.03 µs", "Cycles": "15.75 cy"}, {"type": "detail", "Step Name": "10_TQ_PREP", "Time Duration": "0.01 µs", "Cycles": "5.25 cy"}, {"type": "detail", "Step Name": "12_CCT", "Time Duration": "0.01 µs", "Cycles": "5.25 cy"}, {"type": "detail", "Step Name": "13_CPL_POSTER", "Time Duration": "0.01 µs", "Cycles": "5.25 cy"}, {"type": "detail", "Step Name": "14_INT_GEN", "Time Duration": "0.01 µs", "Cycles": "5.25 cy"}]};
+    const COLORS = [
+      "#636EFA", "#EF553B", "#00CC96", "#AB63FA", "#FFA15A",
+      "#19D3F3", "#FF6692", "#B6E880", "#FF97FF", "#FECB52"
+    ];
+    let hidden = new Set();
+
+    function fmt(val, unit) {
+      const f = Number(val);
+      if (!Number.isFinite(f)) return String(val ?? "");
+      if (f === 0) return "0";
+      let s = f.toFixed(4).replace(/0+$/, "").replace(/\.$/, "");
+      return unit ? `${s} ${unit}` : s;
+    }
+
+    function parseTokens(name) {
+      const m = /^\s*(\d+(?:[-.]\d+)*)/.exec(String(name || ""));
+      if (!m) return [];
+      return m[1].replace(/\./g, "-").split("-").map(v => Number(v));
+    }
+
+    function compareNames(a, b) {
+      const ta = parseTokens(a);
+      const tb = parseTokens(b);
+      const n = Math.max(ta.length, tb.length);
+      for (let i = 0; i < n; i++) {
+        const av = i < ta.length ? ta[i] : -1;
+        const bv = i < tb.length ? tb[i] : -1;
+        if (av !== bv) return av - bv;
+      }
+      return String(a).localeCompare(String(b));
+    }
+
+    function buildStageGroups(rows) {
+      const grouped = new Map();
+      const orderKeys = [];
+      for (const row of rows) {
+        const name = row.name || "UNKNOWN";
+        const tokens = parseTokens(name);
+        const root = tokens.length ? tokens[0] : null;
+        const topLane = tokens.length >= 2 ? tokens[1] : 0;
+        const key = tokens.length ? `root:${root}` : `name:${name}`;
+
+        if (!grouped.has(key)) {
+          grouped.set(key, {root, lanes: new Map()});
+          orderKeys.push(key);
+        }
+        const laneMap = grouped.get(key).lanes;
+        if (!laneMap.has(topLane)) laneMap.set(topLane, []);
+        laneMap.get(topLane).push({
+          name,
+          avg: Number(row.duration_scaled || 0),
+          index: REPORT.flow.findIndex(r => r.name === name)
+        });
+      }
+
+      return orderKeys.map(key => {
+        const group = grouped.get(key);
+        const lanes = Array.from(group.lanes.keys()).sort((a, b) => a - b).map(laneKey => {
+          const items = group.lanes.get(laneKey).slice().sort((a, b) => compareNames(a.name, b.name));
+          const total = items.reduce((sum, item) => sum + item.avg, 0);
+          return {laneKey, items, total};
+        });
+        const span = lanes.reduce((max, lane) => Math.max(max, lane.total), 0);
+        return {root: group.root, lanes, span};
+      });
+    }
+
+    function renderLegend() {
+      const legend = document.getElementById("legend");
+      legend.innerHTML = "";
+      REPORT.flow.forEach((row, idx) => {
+        const name = row.name || "UNKNOWN";
+        const btn = document.createElement("button");
+        btn.className = hidden.has(name) ? "hidden" : "";
+        btn.innerHTML = `<span class="swatch" style="background:${COLORS[idx % COLORS.length]}"></span>${name}`;
+        btn.addEventListener("click", () => {
+          if (hidden.has(name)) hidden.delete(name);
+          else hidden.add(name);
+          render();
+        });
+        legend.appendChild(btn);
+      });
+    }
+
+    function renderFlow() {
+      const meta = REPORT.meta || {};
+      const unit = meta.unit_label || "";
+      const rows = (REPORT.flow || []).filter(row => !hidden.has(row.name || "UNKNOWN"));
+      const groups = buildStageGroups(rows);
+      const total = groups.reduce((sum, group) => sum + group.span, 0);
+
+      document.getElementById("flowTitle").textContent = `Average Flow Sequence (Total: ${fmt(total, unit)})`;
+      const flow = document.getElementById("flow");
+      flow.innerHTML = "";
+
+      if (!rows.length) {
+        const empty = document.createElement("div");
+        empty.className = "empty";
+        empty.textContent = "No visible flow steps";
+        flow.appendChild(empty);
+        return;
+      }
+
+      groups.forEach(group => {
+        const stage = document.createElement("div");
+        stage.className = "stage";
+        stage.style.flexGrow = String(Math.max(group.span, 0.0001));
+
+        group.lanes.forEach(lane => {
+          const laneEl = document.createElement("div");
+          laneEl.className = "lane";
+          lane.items.forEach(item => {
+            const bar = document.createElement("div");
+            bar.className = "bar";
+            const colorIdx = item.index >= 0 ? item.index : 0;
+            bar.style.background = COLORS[colorIdx % COLORS.length];
+            bar.style.width = `${Math.max(5, (item.avg / Math.max(group.span, 1e-12)) * 100)}%`;
+            bar.title = `${item.name}\nAvg: ${fmt(item.avg, unit)}`;
+            bar.innerHTML = `${item.name}<br>${fmt(item.avg, unit)}`;
+            laneEl.appendChild(bar);
+          });
+          stage.appendChild(laneEl);
+        });
+        flow.appendChild(stage);
+      });
+    }
+
+    function renderDetail() {
+      const meta = REPORT.meta || {};
+      const columns = meta.detail_columns || [];
+      const rows = REPORT.detail || [];
+      document.getElementById("detailMeta").textContent =
+        `CMD ${meta.detail_cmd_id || ""}${meta.detail_freq_mhz ? `, ${meta.detail_freq_mhz} MHz` : ""}`;
+
+      const head = document.getElementById("detailHead");
+      const body = document.getElementById("detailBody");
+      head.innerHTML = "";
+      body.innerHTML = "";
+
+      columns.forEach(col => {
+        const th = document.createElement("th");
+        th.textContent = col;
+        head.appendChild(th);
+      });
+
+      rows.forEach(row => {
+        const tr = document.createElement("tr");
+        columns.forEach(col => {
+          const td = document.createElement("td");
+          td.textContent = row[col] ?? "";
+          tr.appendChild(td);
+        });
+        body.appendChild(tr);
+      });
+    }
+
+    function renderMeta() {
+      const meta = REPORT.meta || {};
+      document.getElementById("metaText").textContent =
+        `CMD ${meta.start_cmd ?? ""}~${meta.end_cmd ?? ""} | Mode=${meta.data_mode || "time"} | Unit=${meta.unit_label || ""}`;
+    }
+
+    function render() {
+      renderMeta();
+      renderLegend();
+      renderFlow();
+      renderDetail();
+    }
+
+    render();
+  </script>
+</body>
+</html>
